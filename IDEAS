@@ -1,0 +1,9 @@
+1) Implement variants of the copy, move, delete etc
+that work on the file/dir dir one level upwards.
+
+2) Implement a statusbar where output of commands
+could be shown.
+
+3) It seems when a file name contains a '\n' character it can't
+be accessed from the keycmd interface. It should be escaped as
+a solution.
