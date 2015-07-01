@@ -116,13 +116,6 @@ def rename(view):
     view.update_view_list()
     view.set_curselection_on()
 
-def open_with(view):
-    ph = view.get_curselection_path()
-    nix.open_with(ph)
-
-def open_with_default(view):
-    ph = view.get_curselection_path()
-    nix.open_with_default(ph)
 
 
 def remove_node(view):
@@ -203,10 +196,9 @@ def install(view):
                (1, '<F3>', lambda event: rename(event.widget)), 
                (1, '<Control-u>', lambda event: clip_curselection(event.widget)), 
                (1, '<F1>', lambda event: create_text_file(event.widget)),
-               (1, '<Key-o>', lambda event: open_with(event.widget)), 
-               (1, '<Key-i>', lambda event: open_with_default(event.widget)), 
                (1, '<Key-z>', lambda event: remove_node(event.widget)), 
                (1, '<Key-s>', lambda event: toggle_pick(event.widget)))
            
+
 
 

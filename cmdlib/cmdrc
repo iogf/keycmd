@@ -18,6 +18,19 @@ autoload(cmdlib.modes.standard)
 import cmdlib.modes.status
 autoload(cmdlib.modes.status)
 
+import cmdlib.modes.openwith
+autoload(cmdlib.modes.openwith,
+         map={'.py': 'vy',
+              '.pdf': 'evince',
+              '.djvu': 'evince',
+              '.c': 'vy',
+              '.jpg': 'feh',
+              '.exe': 'wine',
+              '.png': 'feh',
+              '.mp4': 'mplayer',
+              '.html': 'google-chrome'},
+         default='vy')
+
 def setup(view):
     view.tag_configure('d', foreground='red')
     view.tag_configure('-', foreground='blue')
@@ -25,5 +38,6 @@ def setup(view):
 
 
 autocall(setup) 
+
 
 
