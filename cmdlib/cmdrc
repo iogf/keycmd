@@ -1,0 +1,29 @@
+import sys
+##############################################################################
+
+from os.path import expanduser
+sys.path.append('%s/.keycmd/' % expanduser('~'))
+##############################################################################
+
+# Functions used to load the plugins.
+from cmdlib.modes import autoload, autocall
+
+##############################################################################
+# modes, plugins.
+
+##############################################################################
+import cmdlib.modes.standard
+autoload(cmdlib.modes.standard)
+
+import cmdlib.modes.status
+autoload(cmdlib.modes.status)
+
+def setup(view):
+    view.tag_configure('d', foreground='red')
+    view.tag_configure('-', foreground='blue')
+    view.tag_configure('sel', background='grey')
+
+
+autocall(setup) 
+
+

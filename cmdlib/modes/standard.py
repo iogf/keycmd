@@ -8,9 +8,9 @@
 #
 #
 
-from ask import Ask
+from cmdlib.ask import Ask
 import os
-import nix
+from cmdlib import nix
 
 def add_node(view):
     """
@@ -52,16 +52,6 @@ def cd_dir_path(view):
     view.change_view(iidm, ask.data)
     view.set_curselection(iidm)
 
-"""
-def go_prev_dir(view):
-    iidn = view.get_curselection()
-    iidm = view.get_item_dir(iidn)
-    iidz = view.prev(iidm)
-
-    if not iidz: return
-    view.set_curselection(iidz)
-"""
-
 def go_prev_dir(view):
     iidn = view.get_curselection()
     iidm = view.get_item_dir(iidn)
@@ -71,16 +61,6 @@ def go_prev_dir(view):
 
     view.set_curselection(iidz if iidz else iidm)
 
-"""
-def go_next_dir(view):
-    iidn = view.get_curselection()
-    iidm = view.get_item_dir(iidn)
-    iidz = view.next(iidm)
-
-    if not iidz: return
-    view.set_curselection(iidz)
-"""
-
 def go_next_dir(view):
     iidn = view.get_curselection()
     iidm = view.get_item_dir(iidn)
@@ -88,7 +68,6 @@ def go_next_dir(view):
     iidz = view.next(iidm)
 
     view.set_curselection(iidz if iidz else iidn)
-
 
 def cp(view):
     """
@@ -163,16 +142,6 @@ def new_dir(view):
     view.update_view_list()
     view.set_curselection_on()
 
-"""
-def go_end(view):
-    iidn = view.get_curselection()
-    iidm = view.get_item_dir(iidn)
-
-    xs = view.get_children(iidm)
-    iidz = xs[-1] if xs else iidm
-    view.set_curselection(iidz)
-"""
-
 def flip_show_hidden(view):
     view.show_hidden = False if view.show_hidden else True
     view.update_view_list()
@@ -209,59 +178,35 @@ def unzip(view):
     view.update_view_list()
     view.set_curselection_on()
 
+def toggle_pick(view):
+    iid  = view.selection()[0]
 
-def load(view):
-    import utils
-    INSTALL = [('<Key-k>', lambda view: view.event_generate('<Key-Up>')), 
-               ('<Key-j>', lambda view: view.event_generate('<Key-Down>')),
-               ('<Key-c>', add_node), 
-               ('<Key-e>', cd_dir), 
-               ('<Key-y>', cp), 
-               ('<Control-y>', cp_with_prefix), 
-               ('<Control-e>', unzip), 
-               ('<Control-h>', flip_show_hidden), 
+    if not view.tag_has('sel', iid): view.pick()
+    else: view.unpick()
 
-               ('<Key-E>', cd_dir_path), 
-               ('<Key-b>', cd_prev_dir), 
-               ('<Key-h>', go_prev_dir), 
-               ('<F2>', new_dir),
-               ('<Key-l>', go_next_dir), 
-               ('<Key-m>', mv), 
-               ('<Key-d>', rm), 
-               ('<F3>', rename), 
-               ('<Control-u>', clip_curselection), 
-               ('<F1>', create_text_file),
-               ('<Key-o>', open_with), 
-               ('<Key-i>', open_with_default), 
-               ('<Key-z>', remove_node), 
-               ('<Key-s>', lambda view: view.pick())]
-            
-
-    utils.install(INSTALL, view)
-
-    view.tag_configure('d', foreground='red')
-    view.tag_configure('-', foreground='blue')
-    view.tag_configure('sel', background='grey')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def install(view):
+    view.install((1, '<Key-k>', lambda event: event.widget.event_generate('<Key-Up>')), 
+               (1, '<Key-j>', lambda event: event.widget.event_generate('<Key-Down>')),
+               (1, '<Key-c>', lambda event: add_node(event.widget)), 
+               (1, '<Key-e>', lambda event: cd_dir(event.widget)), 
+               (1, '<Key-y>', lambda event: cp(event.widget)), 
+               (1, '<Control-y>', lambda event: cp_with_prefix(event.widget)), 
+               (1, '<Control-e>', lambda event: unzip(event.widget)), 
+               (1, '<Control-h>', lambda event: flip_show_hidden(event.widget)), 
+               (1, '<Key-E>',lambda event:  cd_dir_path(event.widget)), 
+               (1, '<Key-b>', lambda event: cd_prev_dir(event.widget)), 
+               (1, '<Key-h>',lambda event:  go_prev_dir(event.widget)), 
+               (1, '<F2>',lambda event:  new_dir(event.widget)),
+               (1, '<Key-l>', lambda event: go_next_dir(event.widget)), 
+               (1, '<Key-m>',lambda event:  mv(event.widget)), 
+               (1, '<Key-d>',lambda event:  rm(event.widget)), 
+               (1, '<F3>', lambda event: rename(event.widget)), 
+               (1, '<Control-u>', lambda event: clip_curselection(event.widget)), 
+               (1, '<F1>', lambda event: create_text_file(event.widget)),
+               (1, '<Key-o>', lambda event: open_with(event.widget)), 
+               (1, '<Key-i>', lambda event: open_with_default(event.widget)), 
+               (1, '<Key-z>', lambda event: remove_node(event.widget)), 
+               (1, '<Key-s>', lambda event: toggle_pick(event.widget)))
+           
 
 
