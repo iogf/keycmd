@@ -6,11 +6,11 @@ import subprocess
 from cmdlib.view import *
 from cmdlib.statusbar import *
 import sys
-
+from os.path import expanduser
 
 # The default directoy path which will be viewed when
 # keycmd launches.
-DEFAULT_PATH = '/home/tau'
+DEFAULT_PATH = expanduser("~")
 
 # It points to the root toplevel window of vy. It is the one whose AreaVi instances
 # are placed on. 
@@ -91,6 +91,7 @@ class App(object):
 if __name__ == '__main__':
     app = App()
     app.root.mainloop()
+
 
 
 

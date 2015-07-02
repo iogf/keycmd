@@ -135,6 +135,17 @@ over the view /home/tau/dir or over one of its subviews then pressing 'Key-b'.
 
 Try it out.
 
+**Creating a file**
+
+
+**Creating a directory**
+
+
+**Renaming files**
+
+
+**Opening files**
+
 
 
 
