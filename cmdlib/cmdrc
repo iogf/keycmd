@@ -18,6 +18,9 @@ autoload(cmdlib.modes.standard)
 import cmdlib.modes.status
 autoload(cmdlib.modes.status)
 
+import cmdlib.modes.qsearch
+autoload(cmdlib.modes.qsearch)
+
 import cmdlib.modes.openwith
 autoload(cmdlib.modes.openwith,
          map={'.py': 'vy',
@@ -38,6 +41,7 @@ def setup(view):
 
 
 autocall(setup) 
+
 
 
 

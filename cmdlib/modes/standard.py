@@ -177,6 +177,9 @@ def toggle_pick(view):
     if not view.tag_has('sel', iid): view.pick()
     else: view.unpick()
 
+def select(view):
+    view.chmode(1)
+
 def install(view):
     view.install((1, '<Key-k>', lambda event: event.widget.event_generate('<Key-Up>')), 
                (1, '<Key-j>', lambda event: event.widget.event_generate('<Key-Down>')),
@@ -192,6 +195,7 @@ def install(view):
                (1, '<F2>',lambda event:  new_dir(event.widget)),
                (1, '<Key-l>', lambda event: go_next_dir(event.widget)), 
                (1, '<Key-m>',lambda event:  mv(event.widget)), 
+               (-1, '<Escape>', lambda event: select(event.widget)),
                (1, '<Key-d>',lambda event:  rm(event.widget)), 
                (1, '<F3>', lambda event: rename(event.widget)), 
                (1, '<Control-u>', lambda event: clip_curselection(event.widget)), 
@@ -199,6 +203,7 @@ def install(view):
                (1, '<Key-z>', lambda event: remove_node(event.widget)), 
                (1, '<Key-s>', lambda event: toggle_pick(event.widget)))
            
+
 
 
 

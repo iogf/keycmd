@@ -14,9 +14,26 @@ of the tree. The nodes are grouped into a sequential style.
 Videos
 ======
 
-Installation
+
+Dependencies
 ============
 
+
+
+Installation
+============
+Supposing you have keycmd code in a directory named keycmd-code.
+
+Installation as user
+
+    cd keycmd-code
+    python setup.py install --user
+    
+Or
+    cd keycmd-code
+    python setup.py install
+
+as root.
 
 Basic usage
 ===========
@@ -136,20 +153,43 @@ over the view /home/tau/dir or over one of its subviews then pressing 'Key-b'.
 Try it out.
 
 **Creating a file**
-
+In order to create a file you put the cursor over a view then press 'F1'.
+It will open an edit area where you will type the filename.
 
 **Creating a directory**
-
+Put the cursor over a view then type 'F2', it opens an edit area where to type
+the dir name.
 
 **Renaming files**
+Put the cursor over a view or a subview then press 'F3', it will open an edit area
+where to insert the new name.
+
+**Quickly changing cursor to a view/subview**
+
+Keycmd supports a mode named Quick Search which permits you to type
+some simple patterns then quickly change the cursor to a given subview.
+
+Once you press 'Key-backslash' or '\' in standard mode it will enter quick search mode.
+Whatever you type will be interpreted as a pattern. The pattern appears on the statusbar.
+You can type backspace to erase a letter in case you have mistaken.
+When it finally sets the cursor over the right item then you can type 'Esc'
+to go back to standard mode.
+
+**Copying dirs/files**
+
+The way to copy files with keycmd consists of selectiong a set of views or subviews
+then putting the cursor over a given view or subview then pressing 'Key-y'.
+Keycmd will copy whatever is selected to the directory whose cursor is over.
+
+**Mouting filesystems**
+
+
+**Creating a hard link**
+
+**Configuration file**
 
 
 **Opening files**
-
-
-
-
-
 
 
 
