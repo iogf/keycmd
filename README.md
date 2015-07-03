@@ -153,14 +153,17 @@ over the view /home/tau/dir or over one of its subviews then pressing 'Key-b'.
 Try it out.
 
 **Creating a file**
+
 In order to create a file you put the cursor over a view then press 'F1'.
 It will open an edit area where you will type the filename.
 
 **Creating a directory**
+
 Put the cursor over a view then type 'F2', it opens an edit area where to type
 the dir name.
 
 **Renaming files**
+
 Put the cursor over a view or a subview then press 'F3', it will open an edit area
 where to insert the new name.
 
@@ -181,17 +184,93 @@ The way to copy files with keycmd consists of selectiong a set of views or subvi
 then putting the cursor over a given view or subview then pressing 'Key-y'.
 Keycmd will copy whatever is selected to the directory whose cursor is over.
 
-**Mouting filesystems**
+**Mounting filesystems**
 
 
 **Creating a hard link**
 
 **Configuration file**
 
+Keycmd has a configuration file where you can set options for the plugins as well as
+set some personalized stuff for the graphical interface. Set which plugins should be loaded etc.
+
+The file is cmdrc and should be created in your home directory inside .keycmd after
+keycmd is launched for a first time.
+
+The file cmdrc is a python script that is executed wheneer keycmd is launched.
+
+~~~python
+# cmdrc
+
+import sys
+##############################################################################
+
+from os.path import expanduser
+sys.path.append('%s/.keycmd/' % expanduser('~'))
+##############################################################################
+
+# Functions used to load the plugins.
+from cmdlib.modes import autoload, autocall
+
+##############################################################################
+# modes, plugins.
+
+##############################################################################
+
+# The basic set of key commands that keycmd supports.
+import cmdlib.modes.standard
+autoload(cmdlib.modes.standard)
+
+# Used to update the statusbar mode field in which keycmd is in.
+import cmdlib.modes.status
+autoload(cmdlib.modes.status)
+
+# Used to quickly jump to views/subviews.
+import cmdlib.modes.qsearch
+autoload(cmdlib.modes.qsearch)
+
+# This is the openwith plugin that defines a set of applications
+# to be used when opening files.
+# This is the set of applications for default. You should
+# append or modify this mapping according to your needs.
+import cmdlib.modes.openwith
+autoload(cmdlib.modes.openwith,
+         map={'.py': 'vy',
+              '.pdf': 'evince',
+              '.djvu': 'evince',
+              '.c': 'vy',
+              '.jpg': 'feh',
+              '.exe': 'wine',
+              '.png': 'feh',
+              '.mp4': 'mplayer',
+              '.html': 'google-chrome'},
+         default='vy')
+
+# This function is called when keycmd launches and is used
+# to set configurations for keycmd.
+def setup(view):
+    view.tag_configure('d', foreground='red')        # Set the color for directories.
+    view.tag_configure('-', foreground='blue')       # Set the color for files.
+    view.tag_configure('sel', background='white')     # Set the color for selected items.
+
+    # Used to set background, foreground colors.
+    import ttk
+    ttk.Style().configure("Treeview", background="black", 
+                          foreground="green", fieldbackground="black")
+    
+autocall(setup) 
+~~~
+
+You should modify the mapping passed to openwith mode according to your needs.
 
 **Opening files**
 
+Once you have set your default applications to open files inside ~/.keycmd/cmdrc then
+you will able to open files based on their extension.
 
+Suppose you have defined to open '.c' files with gedit, if you put the cursor
+over a file named 'cool.c' then type 'Key-o' it will launch gedit with the cool.c file
+opened in it.
 
 
 

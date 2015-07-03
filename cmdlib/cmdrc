@@ -1,3 +1,5 @@
+# cmdrc
+
 import sys
 ##############################################################################
 
@@ -12,15 +14,23 @@ from cmdlib.modes import autoload, autocall
 # modes, plugins.
 
 ##############################################################################
+
+# The basic set of key commands that keycmd supports.
 import cmdlib.modes.standard
 autoload(cmdlib.modes.standard)
 
+# Used to update the statusbar mode field in which keycmd is in.
 import cmdlib.modes.status
 autoload(cmdlib.modes.status)
 
+# Used to quickly jump to views/subviews.
 import cmdlib.modes.qsearch
 autoload(cmdlib.modes.qsearch)
 
+# This is the openwith plugin that defines a set of applications
+# to be used when opening files.
+# This is the set of applications for default. You should
+# append or modify this mapping according to your needs.
 import cmdlib.modes.openwith
 autoload(cmdlib.modes.openwith,
          map={'.py': 'vy',
@@ -34,13 +44,21 @@ autoload(cmdlib.modes.openwith,
               '.html': 'google-chrome'},
          default='vy')
 
+# This function is called when keycmd launches and is used
+# to set configurations for keycmd.
 def setup(view):
-    view.tag_configure('d', foreground='red')
-    view.tag_configure('-', foreground='blue')
-    view.tag_configure('sel', background='grey')
+    view.tag_configure('d', foreground='red')        # Set the color for directories.
+    view.tag_configure('-', foreground='blue')       # Set the color for files.
+    view.tag_configure('sel', background='white')     # Set the color for selected items.
 
-
+    # Used to set background, foreground colors.
+    import ttk
+    ttk.Style().configure("Treeview", background="black", 
+                          foreground="green", fieldbackground="black")
+    
 autocall(setup) 
+
+
 
 
 
