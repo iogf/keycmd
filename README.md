@@ -14,15 +14,15 @@ of the tree. The nodes are grouped into a sequential style.
 Videos
 ======
 
-
-Dependencies
-============
-
-
-
 Installation
 ============
 Supposing you have keycmd code in a directory named keycmd-code.
+
+
+    su
+    apt-get install usbmount
+    apt-get install zip
+    exit
 
 Installation as user
 
@@ -185,9 +185,9 @@ then putting the cursor over a given view or subview then pressing 'Key-y'.
 Keycmd will copy whatever is selected to the directory whose cursor is over.
 
 **Mounting filesystems**
-
-
-**Creating a hard link**
+It is possible to implement a key command to execute mount command
+to mount some device. I haven't felt that need so far. Whenever
+i need to mount usb storages there is the usbmount package which does it for me.
 
 **Configuration file**
 
@@ -273,6 +273,10 @@ over a file named 'cool.c' then type 'Key-o' it will launch gedit with the cool.
 opened in it.
 
 
+**Moving files**
+
+Moving files works pretty much like copying files. You selected the files
+then put the cursor over a given view/subview then press 'Key-m'.
 
 
 
