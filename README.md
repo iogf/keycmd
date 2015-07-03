@@ -14,6 +14,11 @@ of the tree. The nodes are grouped into a sequential style.
 Videos
 ======
 
+I'm using i3 wm and keycmd in this video.
+The video shows how you can quickly manage files with keycmd.
+
+https://youtu.be/NXUz4Vp_sco
+
 Installation
 ============
 Supposing you have keycmd code in a directory named keycmd-code.
@@ -277,6 +282,7 @@ opened in it.
 
 Moving files works pretty much like copying files. You selected the files
 then put the cursor over a given view/subview then press 'Key-m'.
+
 
 
 
