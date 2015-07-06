@@ -180,6 +180,13 @@ def toggle_pick(view):
 def select(view):
     view.chmode(1)
 
+def add_view_from_ph(view):
+    ask = Ask(view, 'Insert path.')
+
+    iidm = view.add_view(ask.data)
+    view.set_curselection(iidm)
+
+
 def install(view):
     view.install((1, '<Key-k>', lambda event: event.widget.event_generate('<Key-Up>')), 
                (1, '<Key-j>', lambda event: event.widget.event_generate('<Key-Down>')),
@@ -190,6 +197,7 @@ def install(view):
                (1, '<Control-e>', lambda event: unzip(event.widget)), 
                (1, '<Control-h>', lambda event: flip_show_hidden(event.widget)), 
                (1, '<Key-E>',lambda event:  cd_dir_path(event.widget)), 
+               (1, '<Key-t>',lambda event:  add_view_from_ph(event.widget)), 
                (1, '<Key-b>', lambda event: cd_prev_dir(event.widget)), 
                (1, '<Key-h>',lambda event:  go_prev_dir(event.widget)), 
                (1, '<F2>',lambda event:  new_dir(event.widget)),
@@ -203,6 +211,7 @@ def install(view):
                (1, '<Key-z>', lambda event: remove_node(event.widget)), 
                (1, '<Key-s>', lambda event: toggle_pick(event.widget)))
            
+
 
 
 
