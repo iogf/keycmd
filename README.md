@@ -289,6 +289,10 @@ Sometimes you may need to add a view from a text path.
 You do so by pressing 'Key-t' then inserting the path then pressing
 'Return'
 
+Contributors
+============
+
+rabbiter at irc.freenode.org who pointed out a bug with cmdlib.ask.
 
 
 
