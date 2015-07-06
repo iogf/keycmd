@@ -1,4 +1,4 @@
-from vyapp.ask import *
+from cmdlib.ask import *
 from re import escape
 from cmdlib.app import root
 
@@ -52,4 +52,5 @@ class QuickSearch(object):
 
 
 install = QuickSearch
+
 
