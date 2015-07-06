@@ -283,6 +283,12 @@ opened in it.
 Moving files works pretty much like copying files. You selected the files
 then put the cursor over a given view/subview then press 'Key-m'.
 
+**Adding a view from path.**
+
+Sometimes you may need to add a view from a text path.
+You do so by pressing 'Key-t' then inserting the path then pressing
+'Return'
+
 
 
 
