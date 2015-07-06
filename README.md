@@ -292,7 +292,8 @@ You do so by pressing 'Key-t' then inserting the path then pressing
 Contributors
 ============
 
-rabbiter at irc.freenode.org who pointed out a bug with cmdlib.ask.
+rabbitear at irc.freenode.org who pointed out a bug with cmdlib.ask.
+
 
 
 
