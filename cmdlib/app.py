@@ -84,13 +84,12 @@ class App(object):
         for handle, args, kwargs in HANDLE:
             handle(self.view, *args, **kwargs)
 
-        self.view.add_mode(1, opt=True)
-        self.view.chmode(1)
 
 
 if __name__ == '__main__':
     app = App()
     app.root.mainloop()
+
 
 
 

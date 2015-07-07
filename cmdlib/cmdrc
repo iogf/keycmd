@@ -9,11 +9,15 @@ sys.path.append('%s/.keycmd/' % expanduser('~'))
 
 # Functions used to load the plugins.
 from cmdlib.modes import autoload, autocall
+##############################################################################
+# Important plugins.
+
+# Define the modes.
+import cmdlib.modes.setmod
+autoload(cmdlib.modes.setmod)
 
 ##############################################################################
 # modes, plugins.
-
-##############################################################################
 
 # The basic set of key commands that keycmd supports.
 import cmdlib.modes.standard
@@ -44,6 +48,16 @@ autoload(cmdlib.modes.openwith,
               '.html': 'google-chrome'},
          default='vy')
 
+
+# Used to unpack files.
+import cmdlib.modes.zip
+autoload(cmdlib.modes.zip)
+
+
+# Basic commands.
+import cmdlib.modes.command
+autoload(cmdlib.modes.command)
+
 ##############################################################################
 
 # This function is called when keycmd launches and is used
@@ -59,6 +73,9 @@ def setup(view):
                           foreground="green", fieldbackground="black")
     
 autocall(setup) 
+
+
+
 
 
 

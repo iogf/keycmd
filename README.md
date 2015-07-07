@@ -205,6 +205,7 @@ keycmd is launched for a first time.
 The file cmdrc is a python script that is executed wheneer keycmd is launched.
 
 ~~~python
+
 # cmdrc
 
 import sys
@@ -216,11 +217,15 @@ sys.path.append('%s/.keycmd/' % expanduser('~'))
 
 # Functions used to load the plugins.
 from cmdlib.modes import autoload, autocall
+##############################################################################
+# Important plugins.
+
+# Define the modes.
+import cmdlib.modes.setmod
+autoload(cmdlib.modes.setmod)
 
 ##############################################################################
 # modes, plugins.
-
-##############################################################################
 
 # The basic set of key commands that keycmd supports.
 import cmdlib.modes.standard
@@ -251,6 +256,18 @@ autoload(cmdlib.modes.openwith,
               '.html': 'google-chrome'},
          default='vy')
 
+
+# Used to unpack files.
+import cmdlib.modes.zip
+autoload(cmdlib.modes.zip)
+
+
+# Basic commands.
+import cmdlib.modes.command
+autoload(cmdlib.modes.command)
+
+##############################################################################
+
 # This function is called when keycmd launches and is used
 # to set configurations for keycmd.
 def setup(view):
@@ -264,6 +281,7 @@ def setup(view):
                           foreground="green", fieldbackground="black")
     
 autocall(setup) 
+
 ~~~
 
 You should modify the mapping passed to openwith mode according to your needs.
@@ -308,6 +326,7 @@ Help
 
 
 For help you can find us at irc.freenode.org on #vy
+
 
 
 
