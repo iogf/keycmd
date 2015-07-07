@@ -44,6 +44,8 @@ autoload(cmdlib.modes.openwith,
               '.html': 'google-chrome'},
          default='vy')
 
+##############################################################################
+
 # This function is called when keycmd launches and is used
 # to set configurations for keycmd.
 def setup(view):
@@ -57,6 +59,7 @@ def setup(view):
                           foreground="green", fieldbackground="black")
     
 autocall(setup) 
+
 
 
 

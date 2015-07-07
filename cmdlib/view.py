@@ -145,10 +145,12 @@ class View(Treeview):
     def delete_view_data(self, iid):
         """
         """
+
         self.delete(*self.get_children(iid))
 
     def get_item_dir(self, iid):
         """
+
         """
 
         iidn = self.parent(iid)
@@ -157,7 +159,9 @@ class View(Treeview):
     
     def get_item_path(self, iid):
         """
+
         """
+
         iidn = self.parent(iid)
 
         if not iidn:
@@ -166,18 +170,19 @@ class View(Treeview):
         dirname = self.item(iidn, 'text')
         return join(dirname, self.item(iid , 'text'))
 
-    def get_item_coord(self, iid):
-        """
-        It returns a tuple like (a, b, c, ...)
-        Which corresponds to an item depth in the tree.
-        """
-        pass
-
     def get_pick_list(self):
+        """
+
+        """
+
         xs = self.tag_has('sel')
         return map(lambda iid: self.get_item_path(iid), xs)
 
     def unpick_all(self):
+        """
+
+        """
+
         pass
 
     def unpick(self):
@@ -200,6 +205,10 @@ class View(Treeview):
 
 
     def pick(self):
+        """
+
+        """
+
         iid  = self.selection()[0]
         tags = self.item(iid, 'tags')
         tags = tags + ('sel',)
@@ -214,9 +223,6 @@ class View(Treeview):
     def get_curselection_path(self):
         iid = self.selection()[0]
         return self.get_item_path(iid)
-
-    def set_curselection_with_coord(self, coord):
-        pass
 
     def set_curselection(self, iid):
         """
@@ -233,10 +239,15 @@ class View(Treeview):
         self.set_curselection(self.get_children('')[0])
 
     def find_item(self, regex):
+        """
+
+        """
+
         for ind in self.get_children(self.get_item_dir(self.selection()[0])):
             if search(regex, self.item(ind, 'text')): 
                 self.set_curselection(ind)
                 break
+
 
 
 

@@ -277,6 +277,14 @@ Suppose you have defined to open '.c' files with gedit, if you put the cursor
 over a file named 'cool.c' then type 'Key-o' it will launch gedit with the cool.c file
 opened in it.
 
+**Opening files with default applications**
+
+The parameter default='vy' passed to the autoload function in the cmdrc file
+determines with which application the command 'Key-i' will work with.
+Sometimes you don't want to open a .html file with a browser but with an editor
+in that case you can put the cursor over the .html file then type 'Key-i'
+it would launch vy(that is my vim like editor in python) with the html file opened in it.
+
 
 **Moving files**
 
@@ -300,6 +308,7 @@ Help
 
 
 For help you can find us at irc.freenode.org on #vy
+
 
 
 
