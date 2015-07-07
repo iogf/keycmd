@@ -9,7 +9,7 @@ def update_mode(view):
 
     def cave():
         if not cave.keep: return
-        root.statusbar.set_mode('Mode: %s' % view.id)
+        root.statusbar.set_mode(view.id)
         view.after(TIME, cave)
 
     """
@@ -30,5 +30,6 @@ def update_mode(view):
 
 def install(view):
     view.install((-1, '<FocusIn>', lambda event: update_mode(event.widget)))
+
 
 
