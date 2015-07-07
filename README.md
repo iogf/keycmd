@@ -17,6 +17,8 @@ Videos
 I'm using i3 wm and keycmd in this video.
 The video shows how you can quickly manage files with keycmd.
 
+https://youtu.be/JdTZu06NDQM
+
 https://youtu.be/NXUz4Vp_sco
 
 Installation
@@ -326,6 +328,7 @@ Help
 
 
 For help you can find us at irc.freenode.org on #vy
+
 
 
 
