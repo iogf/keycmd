@@ -295,6 +295,13 @@ Contributors
 rabbitear at irc.freenode.org who pointed out a bug with cmdlib.ask.
 
 
+Help
+====
+
+
+For help you can find us at irc.freenode.org on #vy
+
+
 
 
 
