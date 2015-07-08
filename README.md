@@ -318,7 +318,7 @@ You do so by pressing 'Key-t' then inserting the path then pressing
 'Return'
 
 
-**Copy view/subview path to clipboard**
+**Copy view/subview path to the clipboard**
 
 Sometimes it is interesting to have the complete path of a given view/subview in the clipboard.
 So you can paste it anywhere. For such, you put the cursor over a givem view/subview then
