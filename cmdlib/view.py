@@ -89,7 +89,10 @@ class View(Treeview):
     
     def add_view(self, ph):
         """
+        It adds a view based on a path. A view is a tree node
+        whose items are a listing of the files/dirs belonging to a path.
 
+        Items are named subviews in this context.
         """
         if not os.path.exists(ph): return
         iid = self.insert('', 'end', text=ph, tags=('d', ))
@@ -99,13 +102,11 @@ class View(Treeview):
         self.item(iid, open=True)
         return iid
 
-    def rm_view(self, ph):
-        pass
-
     def change_view(self, iid, ph):
         """
-
+        Used to change a given view path.
         """
+
         self.delete_view_data(iid)
         self.item(iid, text=ph)
         self.put_view_data(iid)
@@ -113,6 +114,7 @@ class View(Treeview):
 
     def update_view(self, iid):
         """
+        This method is used to update the subviews of a given view.
         """
 
         ph = self.get_item_path(iid)
@@ -126,8 +128,10 @@ class View(Treeview):
 
     def update_view_list(self):
         """
-
+        After a given command is executed this method should be called
+        in order to update the views and subviews.
         """
+
         for indi in self.get_children(''):
             self.update_view(indi)
 
@@ -247,6 +251,7 @@ class View(Treeview):
             if search(regex, self.item(ind, 'text')): 
                 self.set_curselection(ind)
                 break
+
 
 
 
