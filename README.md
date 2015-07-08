@@ -317,6 +317,14 @@ Sometimes you may need to add a view from a text path.
 You do so by pressing 'Key-t' then inserting the path then pressing
 'Return'
 
+
+**Copy view/subview path to clipboard**
+
+Sometimes it is interesting to have the complete path of a given view/subview in the clipboard.
+So you can paste it anywhere. For such, you put the cursor over a givem view/subview then
+press 'Control-u' it will copy the path to the clipboard then you can paste it over anywhere.
+
+
 Contributors
 ============
 
@@ -328,6 +336,7 @@ Help
 
 
 For help you can find us at irc.freenode.org on #vy
+
 
 
 
