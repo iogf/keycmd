@@ -35,6 +35,7 @@ autoload(cmdlib.modes.qsearch)
 # to be used when opening files.
 # This is the set of applications for default. You should
 # append or modify this mapping according to your needs.
+# The extensions should be written in lower case.
 import cmdlib.modes.openwith
 autoload(cmdlib.modes.openwith,
          map={'.py': 'vy',
@@ -45,14 +46,18 @@ autoload(cmdlib.modes.openwith,
               '.exe': 'wine',
               '.png': 'feh',
               '.mp4': 'mplayer',
+              '.zip': 'xarchiver',
+              '.rar': 'xarchiver',
+              '.tar': 'xarchiver',
+              '.tar.gz': 'xarchiver',
+              '.tgz': 'xarchiver',
               '.html': 'google-chrome'},
          default='vy')
 
 
 # Used to unpack files.
-import cmdlib.modes.zip
-autoload(cmdlib.modes.zip)
-
+# import cmdlib.modes.zip
+# autoload(cmdlib.modes.zip)
 
 # Basic commands.
 import cmdlib.modes.command
@@ -73,6 +78,11 @@ def setup(view):
                           foreground="green", fieldbackground="black")
     
 autocall(setup) 
+
+
+
+
+
 
 
 

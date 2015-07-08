@@ -7,7 +7,7 @@ def install(view, map, default):
         filename, ext = splitext(ph)
 
         try:
-            app = map[ext]
+            app = map[ext.lower()]
         except KeyError:
             Popen([default, ph], shell=False)
         else:
@@ -19,6 +19,8 @@ def install(view, map, default):
 
     view.install((1, '<Key-o>', lambda event: open_with(event.widget)), 
                  (1, '<Key-i>', lambda event: open_with_default(event.widget)))
+
+
 
 
 

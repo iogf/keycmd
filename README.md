@@ -28,7 +28,6 @@ Supposing you have keycmd code in a directory named keycmd-code.
 
     su
     apt-get install usbmount
-    apt-get install zip
     exit
 
 Installation as user
@@ -245,6 +244,7 @@ autoload(cmdlib.modes.qsearch)
 # to be used when opening files.
 # This is the set of applications for default. You should
 # append or modify this mapping according to your needs.
+# The extensions should be written in lower case.
 import cmdlib.modes.openwith
 autoload(cmdlib.modes.openwith,
          map={'.py': 'vy',
@@ -260,8 +260,8 @@ autoload(cmdlib.modes.openwith,
 
 
 # Used to unpack files.
-import cmdlib.modes.zip
-autoload(cmdlib.modes.zip)
+# import cmdlib.modes.zip
+# autoload(cmdlib.modes.zip)
 
 
 # Basic commands.
@@ -336,6 +336,9 @@ Help
 
 
 For help you can find us at irc.freenode.org on #vy
+
+
+
 
 
 
