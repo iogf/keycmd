@@ -11,6 +11,7 @@ class QuickSearch(object):
         view.install(('Quick Search', '<Key>', lambda event: self.add_data(event.widget, event.keysym_num)),
                         (1, '<Key-backslash>', lambda event: event.widget.chmode('Quick Search')),
                         ('Quick Search', '<Escape>', lambda event: self.clear_data(event.widget)),
+                        ('Quick Search', '<Tab>', lambda event: self.next_match(event.widget)),
                         ('Quick Search', '<BackSpace>', lambda event: self.del_data(event.widget)))
 
 
@@ -34,7 +35,8 @@ class QuickSearch(object):
 
         data = ''.join(self.data)
         root.statusbar.set_msg(data)
-        view.find_item(data)
+        self.seq = view.find_item(data)
+        self.seq.next()
 
     def del_data(self, view):
         """
@@ -48,9 +50,14 @@ class QuickSearch(object):
 
         data = ''.join(self.data)
         root.statusbar.set_msg(data)
-        view.find_item(data)
+        self.seq = view.find_item(data)
+        self.seq.next()
 
+
+    def next_match(self, view):
+        self.seq.next()
 
 install = QuickSearch
+
 
 

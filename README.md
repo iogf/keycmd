@@ -206,14 +206,13 @@ keycmd is launched for a first time.
 The file cmdrc is a python script that is executed wheneer keycmd is launched.
 
 ~~~python
-
 # cmdrc
 
 import sys
 ##############################################################################
 
-from os.path import expanduser
-sys.path.append('%s/.keycmd/' % expanduser('~'))
+from os.path import expanduser, join
+sys.path.append(expanduser('~'), '.keycmd')
 ##############################################################################
 
 # Functions used to load the plugins.
@@ -255,6 +254,11 @@ autoload(cmdlib.modes.openwith,
               '.exe': 'wine',
               '.png': 'feh',
               '.mp4': 'mplayer',
+              '.zip': 'xarchiver',
+              '.rar': 'xarchiver',
+              '.tar': 'xarchiver',
+              '.tar.gz': 'xarchiver',
+              '.tgz': 'xarchiver',
               '.html': 'google-chrome'},
          default='vy')
 
@@ -262,7 +266,6 @@ autoload(cmdlib.modes.openwith,
 # Used to unpack files.
 # import cmdlib.modes.zip
 # autoload(cmdlib.modes.zip)
-
 
 # Basic commands.
 import cmdlib.modes.command
@@ -274,7 +277,7 @@ autoload(cmdlib.modes.command)
 # to set configurations for keycmd.
 def setup(view):
     view.tag_configure('d', foreground='red')        # Set the color for directories.
-    view.tag_configure('-', foreground='blue')       # Set the color for files.
+    view.tag_configure('-', foreground='yellow')       # Set the color for files.
     view.tag_configure('sel', background='white')     # Set the color for selected items.
 
     # Used to set background, foreground colors.
@@ -283,7 +286,6 @@ def setup(view):
                           foreground="green", fieldbackground="black")
     
 autocall(setup) 
-
 ~~~
 
 You should modify the mapping passed to openwith mode according to your needs.
@@ -336,6 +338,7 @@ Help
 
 
 For help you can find us at irc.freenode.org on #vy
+
 
 
 

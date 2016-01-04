@@ -3,8 +3,8 @@
 import sys
 ##############################################################################
 
-from os.path import expanduser
-sys.path.append('%s/.keycmd/' % expanduser('~'))
+from os.path import expanduser, join
+sys.path.append(expanduser('~'), '.keycmd')
 ##############################################################################
 
 # Functions used to load the plugins.
@@ -69,7 +69,7 @@ autoload(cmdlib.modes.command)
 # to set configurations for keycmd.
 def setup(view):
     view.tag_configure('d', foreground='red')        # Set the color for directories.
-    view.tag_configure('-', foreground='blue')       # Set the color for files.
+    view.tag_configure('-', foreground='yellow')       # Set the color for files.
     view.tag_configure('sel', background='white')     # Set the color for selected items.
 
     # Used to set background, foreground colors.
@@ -78,6 +78,8 @@ def setup(view):
                           foreground="green", fieldbackground="black")
     
 autocall(setup) 
+
+
 
 
 

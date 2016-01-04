@@ -3,7 +3,7 @@ from os.path import exists
 from os.path import join
 import os
 from nix import *
-from re import search
+import re
 
 
 class View(Treeview):
@@ -248,9 +248,13 @@ class View(Treeview):
         """
 
         for ind in self.get_children(self.get_item_dir(self.selection()[0])):
-            if search(regex, self.item(ind, 'text')): 
-                self.set_curselection(ind)
-                break
+            sre_match = re.search(regex, self.item(ind, 'text'))
+            if not sre_match:
+                continue
+
+            self.set_curselection(ind)
+            yield
+
 
 
 
