@@ -2,6 +2,7 @@ keycmd
 ======
 
 A modal file manager. Keycmd is a very flexible file manager, probably the most flexible one that exists.
+It is easily extensible since it is python and implemented on top of Tkinter. 
 
 
 Overview
@@ -338,6 +339,7 @@ Help
 
 
 For help you can find us at irc.freenode.org on #vy
+
 
 
 
