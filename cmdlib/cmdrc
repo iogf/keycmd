@@ -4,7 +4,7 @@ import sys
 ##############################################################################
 
 from os.path import expanduser, join
-sys.path.append(expanduser('~'), '.keycmd')
+sys.path.append(join(expanduser('~'), '.keycmd'))
 ##############################################################################
 
 # Functions used to load the plugins.
@@ -78,6 +78,7 @@ def setup(view):
                           foreground="green", fieldbackground="black")
     
 autocall(setup) 
+
 
 
 
