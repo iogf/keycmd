@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python2
 
 from cmdlib import app
 
@@ -6,6 +6,7 @@ if __name__ == '__main__':
     app = app.App()
     app.root.mainloop()
     
+
 
 
 
