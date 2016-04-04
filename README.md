@@ -24,31 +24,15 @@ https://youtu.be/NXUz4Vp_sco
 
 Installation
 ============
-Supposing you have keycmd code in a directory named keycmd-code.
 
-
-    su
-    apt-get install usbmount
-    exit
-
-Installation as user
-
-    cd keycmd-code
-    python setup.py install --user
-    
-Or
-    cd keycmd-code
-    python setup.py install
-
-as root.
+    pip install keycmd
 
 Basic usage
 ===========
 
 The scheme below introduces a simple idea of how keycmd works.
 
-<img src="screenshot.jpg" align="center" height="500" width="700" >
-
+![screenshot-1](screenshot-1.jpg)
 
 
 The line whose background is blue is the cursor. It is used to select files/directories to have commands performed on.
@@ -339,6 +323,7 @@ Help
 
 
 For help you can find us at irc.freenode.org on #vy
+
 
 
 
