@@ -1,6 +1,7 @@
 ########## 
 
 from Tkinter import *
+import ttk
 from ttk import Treeview
 import subprocess
 from cmdlib.view import *
@@ -33,21 +34,33 @@ class App(object):
 
     
         self.view = View(DEFAULT_PATH, False, self.frame1, height=20)
-        self.view.column('#0', width=600)
-        self.view.heading('#0', text='File Name')
+        ysb = ttk.Scrollbar(self.frame1, orient='vertical', command=self.view.yview)
+        xsb = ttk.Scrollbar(self.frame1, orient='horizontal', command=self.view.xview)
+        self.view.configure(yscrollcommand=ysb.set)
+        self.view.configure(xscrollcommand=xsb.set)
+
+        ysb.pack(side='right', fill=Y)
+        xsb.pack(side='bottom', fill=X)
+
+        self.view.configure(yscroll=ysb.set, xscroll=xsb.set)
+        self.view.column('#0', width=500)
+
+        self.view.heading('#0', text='File Name', anchor='w')
 
         self.view['columns'] = ('permission', 'owner', 'group', 'size')
 
-        self.view.heading('permission', text='Permission')
-        self.view.column('permission', width=100, anchor='center')
-        self.view.heading('owner', text='Owner')
-        self.view.column('owner', width=100, anchor='center')
+        self.view.heading('permission', text='Permission', anchor='w')
+        self.view.column('permission', width=100)
 
-        self.view.heading('group', text='Group')
-        self.view.column('group', width=100, anchor='center')
+        self.view.heading('owner', text='Owner', anchor='w')
+        self.view.column('owner', width=80)
 
-        self.view.heading('size', text='Size')
-        self.view.column('size', width=100, anchor='center')
+        self.view.heading('group', text='Group', anchor='w')
+        self.view.column('group', width=80)
+
+        self.view.heading('size', text='Size', anchor='w')
+        self.view.column('size', width=50)
+        self.view.column('size', stretch=True)
 
         self.frame1.pack(expand=True, fill=BOTH, side=TOP)
         self.statusbar = StatusBar(self.root)
@@ -89,6 +102,8 @@ class App(object):
 if __name__ == '__main__':
     app = App()
     app.root.mainloop()
+
+
 
 
 

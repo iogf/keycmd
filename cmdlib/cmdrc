@@ -63,6 +63,10 @@ autoload(cmdlib.modes.openwith,
 import cmdlib.modes.command
 autoload(cmdlib.modes.command)
 
+# View scroll.
+import cmdlib.modes.view_scroll
+autoload(cmdlib.modes.view_scroll)
+
 ##############################################################################
 
 # This function is called when keycmd launches and is used
@@ -78,6 +82,7 @@ def setup(view):
                           foreground="green", fieldbackground="black")
     
 autocall(setup) 
+
 
 
 
