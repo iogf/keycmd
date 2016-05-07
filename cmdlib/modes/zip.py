@@ -5,10 +5,12 @@ def unzip(view):
     dst = view.get_curselection_path()
     cmd = 'unzip %s -d "%s"' % (' '.join(map(lambda it: '"%s"' % it, xs)), dst)
     nix.call(cmd)
-    view.update_view_list()
-    view.set_curselection_on()
+    view.update_all_views()
+    view.activate()()
 
 def install(view):
     view.install((1, '<Control-e>', lambda event: unzip(event.widget))) 
+
+
 
 

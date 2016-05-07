@@ -1,9 +1,0 @@
-"""
-
-"""
-
-    
-def install(view):
-    pass
-
-

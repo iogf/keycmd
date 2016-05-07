@@ -1,8 +1,8 @@
 from ttk import Treeview
 from os.path import exists 
 from os.path import join
+from subprocess import check_output as run
 import os
-from nix import *
 import re
 
 
@@ -16,7 +16,6 @@ class View(Treeview):
         self.show_hidden = show_hidden
 
         self.add_view(default_path)
-    
 
     def chmode(self, id):
         """
@@ -94,7 +93,7 @@ class View(Treeview):
 
         Items are named subviews in this context.
         """
-        if not os.path.exists(ph): return
+        if not os.path.exists(ph) or not os.path.isdir(ph): return
         iid = self.insert('', 'end', text=ph, tags=('d', ))
 
         self.put_view_data(iid)
@@ -126,7 +125,7 @@ class View(Treeview):
             self.delete(iid)
 
 
-    def update_view_list(self):
+    def update_all_views(self):
         """
         After a given command is executed this method should be called
         in order to update the views and subviews.
@@ -140,11 +139,19 @@ class View(Treeview):
 
         """
 
-        ph = self.get_item_path(iid)
-        for ind in listdir(ph, self.show_hidden):
-            self.insert(iid, 'end', 
-                        text=ind[-1], tags=(ind[0][0],),
-                        values=(ind[0], ind[2], ind[3], ind[4]))
+
+        ph     = self.get_item_path(iid)
+        output = run(('ls', '-lLh%s' % ('A' if self.show_hidden else ''), 
+                                            '--group-directories-first', ph))
+        output = re.split('\n+', output)
+        output.pop(0)
+        output.pop(-1)
+        output = (re.split(' +', ind) for ind in output)
+
+        for ind in output:
+            self.insert(iid, 'end', text=' '.join(ind[8:]), tags=(ind[0][0],),
+                            values=(ind[0], ind[1], ind[2], ind[3], ind[4], 
+                                                        ind[5], ind[6], ind[7]))
 
     def delete_view_data(self, iid):
         """
@@ -237,12 +244,12 @@ class View(Treeview):
         self.selection_add((iid, ))
         self.see(iid)
 
-    def set_curselection_on(self):
+    def activate(self):
         """
         """
         self.set_curselection(self.get_children('')[0])
 
-    def find_item(self, regex):
+    def find(self, regex):
         """
 
         """
@@ -254,6 +261,8 @@ class View(Treeview):
 
             self.set_curselection(ind)
             yield
+
+
 
 
 

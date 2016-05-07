@@ -16,26 +16,24 @@ DEFAULT_PATH = expanduser("~")
 # It points to the root toplevel window of vy. It is the one whose AreaVi instances
 # are placed on. 
 root = None
+
 # ENV is a dict holding plugins objects, like functions, classes etc.
 # Plugins should install their handles in ENV.
 ENV  = dict()
 
-# A special dict used to execute on the fly python code.
-DEV  = dict()
 
-
-class App(object):
+class App(Tk):
     def __init__(self):
-        self.root = Tk()
-        self.root.title('Keycmd')        
-        self.frame1 = Frame(self.root, relief = RAISED,
+        Tk.__init__(self)
+        self.title('Keycmd')        
+        self.frame1 = Frame(self, relief = RAISED,
                             padx=3, pady=3,
                             border=3)
 
     
         self.view = View(DEFAULT_PATH, False, self.frame1, height=20)
-        ysb = ttk.Scrollbar(self.frame1, orient='vertical', command=self.view.yview)
-        xsb = ttk.Scrollbar(self.frame1, orient='horizontal', command=self.view.xview)
+        ysb = ttk.Scrollbar(self.view, orient='vertical', command=self.view.yview)
+        xsb = ttk.Scrollbar(self.view, orient='horizontal', command=self.view.xview)
         self.view.configure(yscrollcommand=ysb.set)
         self.view.configure(xscrollcommand=xsb.set)
 
@@ -43,32 +41,46 @@ class App(object):
         xsb.pack(side='bottom', fill=X)
 
         self.view.configure(yscroll=ysb.set, xscroll=xsb.set)
-        self.view.column('#0', width=500)
+        self.view.column('#0', width=500, stretch=True)
 
         self.view.heading('#0', text='File Name', anchor='w')
 
-        self.view['columns'] = ('permission', 'owner', 'group', 'size')
+        self.view['columns'] = ('permission', 'links', 'owner', 'group', 'size', 'month', 'day', 'hour')
 
         self.view.heading('permission', text='Permission', anchor='w')
-        self.view.column('permission', width=100)
+        self.view.column('permission', stretch=True)
+
+        self.view.heading('links', text='Links', anchor='w')
+        self.view.column('links', stretch=True)
 
         self.view.heading('owner', text='Owner', anchor='w')
-        self.view.column('owner', width=80)
+        self.view.column('owner', stretch=True)
 
         self.view.heading('group', text='Group', anchor='w')
-        self.view.column('group', width=80)
+        self.view.column('group', stretch=True)
 
         self.view.heading('size', text='Size', anchor='w')
-        self.view.column('size', width=50)
         self.view.column('size', stretch=True)
 
-        self.frame1.pack(expand=True, fill=BOTH, side=TOP)
-        self.statusbar = StatusBar(self.root)
+        self.view.heading('month', text='Month', anchor='w')
+        self.view.column('month', stretch=True)
+
+        self.view.heading('day', text='Day', anchor='w')
+        self.view.column('day', stretch=True)
+
+        self.view.heading('hour', text='Hour', anchor='w')
+        self.view.column('hour', stretch=True)
+
+        self.read_data = Frame(self)
+
+        self.statusbar = StatusBar(self)
 
         self.view.pack(expand=True, fill=BOTH, side=TOP)
+        self.frame1.pack(expand=True, fill=BOTH, side=TOP)
+
         self.statusbar.pack(side=BOTTOM, fill=X)
 
-        self.view.set_curselection_on()
+        self.view.activate()
         self.view.focus_set()
 
         global root
@@ -99,39 +111,9 @@ class App(object):
 
 
 
+
 if __name__ == '__main__':
     app = App()
-    app.root.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    app.mainloop()
 
 

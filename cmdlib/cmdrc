@@ -13,15 +13,15 @@ from cmdlib.modes import autoload, autocall
 # Important plugins.
 
 # Define the modes.
-import cmdlib.modes.setmod
-autoload(cmdlib.modes.setmod)
+import cmdlib.modes.default_mode
+autoload(cmdlib.modes.default_mode)
 
 ##############################################################################
 # modes, plugins.
 
 # The basic set of key commands that keycmd supports.
-import cmdlib.modes.standard
-autoload(cmdlib.modes.standard)
+import cmdlib.modes.basic_jumps
+autoload(cmdlib.modes.basic_jumps)
 
 # Used to update the statusbar mode field in which keycmd is in.
 import cmdlib.modes.status
@@ -31,37 +31,18 @@ autoload(cmdlib.modes.status)
 import cmdlib.modes.qsearch
 autoload(cmdlib.modes.qsearch)
 
-# This is the openwith plugin that defines a set of applications
-# to be used when opening files.
-# This is the set of applications for default. You should
-# append or modify this mapping according to your needs.
-# The extensions should be written in lower case.
-import cmdlib.modes.openwith
-autoload(cmdlib.modes.openwith,
-         map={'.py': 'vy',
-              '.pdf': 'evince',
-              '.djvu': 'evince',
-              '.c': 'vy',
-              '.jpg': 'feh',
-              '.exe': 'wine',
-              '.png': 'feh',
-              '.mp4': 'mplayer',
-              '.zip': 'xarchiver',
-              '.rar': 'xarchiver',
-              '.tar': 'xarchiver',
-              '.tar.gz': 'xarchiver',
-              '.tgz': 'xarchiver',
-              '.html': 'google-chrome'},
-         default='vy')
-
-
 # Used to unpack files.
 # import cmdlib.modes.zip
 # autoload(cmdlib.modes.zip)
 
+# Used to open files with xdg-open.
+
+import cmdlib.modes.xdg
+autoload(cmdlib.modes.xdg)
+
 # Basic commands.
-import cmdlib.modes.command
-autoload(cmdlib.modes.command)
+import cmdlib.modes.basic_commands
+autoload(cmdlib.modes.basic_commands)
 
 # View scroll.
 import cmdlib.modes.view_scroll
@@ -80,24 +61,9 @@ def setup(view):
     import ttk
     ttk.Style().configure("Treeview", background="black", 
                           foreground="green", fieldbackground="black")
-    
+    view.master.master.geometry('300x500')
+
 autocall(setup) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

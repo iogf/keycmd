@@ -12,18 +12,11 @@ A file system can be abstracted as a tree. Subdirectories can be seen as nodes o
 Keycmd has the feature of viewing a file system as a set of nodes, such nodes correspond to directories
 of the tree. The nodes are grouped into a sequential style.
 
-Videos
-======
-
-I'm using i3 wm and keycmd in this video.
-The video shows how you can quickly manage files with keycmd.
-
-https://youtu.be/JdTZu06NDQM
-
-https://youtu.be/NXUz4Vp_sco
-
 Installation
 ============
+
+**Note:** 
+It demands python2.
 
     pip install keycmd
 
@@ -163,11 +156,9 @@ where to insert the new name.
 Keycmd supports a mode named Quick Search which permits you to type
 some simple patterns then quickly change the cursor to a given subview.
 
-Once you press 'Key-backslash' or '\' in standard mode it will enter quick search mode.
-Whatever you type will be interpreted as a pattern. The pattern appears on the statusbar.
-You can type backspace to erase a letter in case you have mistaken.
-When it finally sets the cursor over the right item then you can type 'Esc'
-to go back to standard mode.
+Once you press 'Key-g' or 'g' in standard mode it will enter quick search mode.
+Whatever you type will be interpreted as a pattern and it will select the subview
+that matches that pattern. Press 'Escape' or 'Return' to exit Quick Search mode.
 
 **Copying dirs/files**
 
@@ -197,7 +188,7 @@ import sys
 ##############################################################################
 
 from os.path import expanduser, join
-sys.path.append(expanduser('~'), '.keycmd')
+sys.path.append(join(expanduser('~'), '.keycmd'))
 ##############################################################################
 
 # Functions used to load the plugins.
@@ -206,15 +197,15 @@ from cmdlib.modes import autoload, autocall
 # Important plugins.
 
 # Define the modes.
-import cmdlib.modes.setmod
-autoload(cmdlib.modes.setmod)
+import cmdlib.modes.default_mode
+autoload(cmdlib.modes.default_mode)
 
 ##############################################################################
 # modes, plugins.
 
 # The basic set of key commands that keycmd supports.
-import cmdlib.modes.standard
-autoload(cmdlib.modes.standard)
+import cmdlib.modes.basic_jumps
+autoload(cmdlib.modes.basic_jumps)
 
 # Used to update the statusbar mode field in which keycmd is in.
 import cmdlib.modes.status
@@ -224,37 +215,22 @@ autoload(cmdlib.modes.status)
 import cmdlib.modes.qsearch
 autoload(cmdlib.modes.qsearch)
 
-# This is the openwith plugin that defines a set of applications
-# to be used when opening files.
-# This is the set of applications for default. You should
-# append or modify this mapping according to your needs.
-# The extensions should be written in lower case.
-import cmdlib.modes.openwith
-autoload(cmdlib.modes.openwith,
-         map={'.py': 'vy',
-              '.pdf': 'evince',
-              '.djvu': 'evince',
-              '.c': 'vy',
-              '.jpg': 'feh',
-              '.exe': 'wine',
-              '.png': 'feh',
-              '.mp4': 'mplayer',
-              '.zip': 'xarchiver',
-              '.rar': 'xarchiver',
-              '.tar': 'xarchiver',
-              '.tar.gz': 'xarchiver',
-              '.tgz': 'xarchiver',
-              '.html': 'google-chrome'},
-         default='vy')
-
-
 # Used to unpack files.
 # import cmdlib.modes.zip
 # autoload(cmdlib.modes.zip)
 
+# Used to open files with xdg-open.
+
+import cmdlib.modes.xdg
+autoload(cmdlib.modes.xdg)
+
 # Basic commands.
-import cmdlib.modes.command
-autoload(cmdlib.modes.command)
+import cmdlib.modes.basic_commands
+autoload(cmdlib.modes.basic_commands)
+
+# View scroll.
+import cmdlib.modes.view_scroll
+autoload(cmdlib.modes.view_scroll)
 
 ##############################################################################
 
@@ -269,7 +245,8 @@ def setup(view):
     import ttk
     ttk.Style().configure("Treeview", background="black", 
                           foreground="green", fieldbackground="black")
-    
+    view.master.master.geometry('300x500')
+
 autocall(setup) 
 ~~~
 
@@ -277,21 +254,10 @@ You should modify the mapping passed to openwith mode according to your needs.
 
 **Opening files**
 
-Once you have set your default applications to open files inside ~/.keycmd/cmdrc then
-you will able to open files based on their extension.
-
+Vy uses xdg-open application to open files. Check the manpages for xdg-open program.
 Suppose you have defined to open '.c' files with gedit, if you put the cursor
 over a file named 'cool.c' then type 'Key-o' it will launch gedit with the cool.c file
 opened in it.
-
-**Opening files with default applications**
-
-The parameter default='vy' passed to the autoload function in the cmdrc file
-determines with which application the command 'Key-i' will work with.
-Sometimes you don't want to open a .html file with a browser but with an editor
-in that case you can put the cursor over the .html file then type 'Key-i'
-it would launch vy(that is my vim like editor in python) with the html file opened in it.
-
 
 **Moving files**
 
@@ -312,30 +278,13 @@ So you can paste it anywhere. For such, you put the cursor over a givem view/sub
 press 'Control-u' it will copy the path to the clipboard then you can paste it over anywhere.
 
 
-Contributors
-============
+Support
+=======
 
-rabbitear at irc.freenode.org who pointed out a bug with cmdlib.ask.
+#### Freenode
 
+**Address:** irc.freenode.org
 
-Help
-====
-
-
-For help you can find us at irc.freenode.org on #vy
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+**Channel:** #vy
 
 

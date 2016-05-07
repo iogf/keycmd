@@ -1,16 +1,10 @@
-# cmd.py
-# Description:
-#
-#
-#
-#
-#
-#
-#
+"""
+
+"""
 
 from cmdlib.ask import Ask
+from cmdlib.app import root
 import os
-from cmdlib import nix
 
 def add_node(view):
     """
@@ -43,7 +37,7 @@ def cd_dir(view):
     view.set_curselection(iidm)
 
 def cd_dir_path(view):
-    ask = Ask(view, 'File name:')
+    ask = Ask(view)
     if not ask.data: return
 
     iidn = view.get_curselection()
@@ -69,40 +63,16 @@ def go_next_dir(view):
 
     view.set_curselection(iidz if iidz else iidn)
 
-def create_text_file(view):
-    ask = Ask(view, 'File name:')
-    if not ask.data: return
-    iidn = view.get_curselection()
-    iidm = view.get_item_dir(iidn)
-    ph = view.get_item_path(iidm)
-
-    fd = open(os.path.join(ph, ask.data), 'a+')
-    fd.close()
-
-    view.update_view_list()
-    view.set_curselection_on()
-
 def remove_node(view):
     iidn = view.get_curselection()
     iidm = view.get_item_dir(iidn)
     view.delete(iidm)               
-    view.set_curselection_on()
-
-def new_dir(view):
-    ask = Ask(view, 'Directory name:')
-    iidn = view.get_curselection()
-    iidm = view.get_item_dir(iidn)
-
-    ph = view.get_item_path(iidm)
-    nix.mkdir(os.path.join(ph, ask.data))
-
-    view.update_view_list()
-    view.set_curselection_on()
+    view.activate()
 
 def flip_show_hidden(view):
     view.show_hidden = False if view.show_hidden else True
-    view.update_view_list()
-    view.set_curselection_on()
+    view.update_all_views()
+    view.activate()
 
 def clip_curselection(view):
     iidn = view.get_curselection()
@@ -118,10 +88,14 @@ def toggle_pick(view):
     else: view.unpick()
 
 def add_view_from_ph(view):
-    ask = Ask(view, 'Insert path.')
+    ask = Ask(view)
+    if not ask.data: return
 
     iidm = view.add_view(ask.data)
-    view.set_curselection(iidm)
+    if iidm:
+        view.set_curselection(iidm)
+    else:
+        root.statusbar.set_msg('Invalid path!')
 
 
 def install(view):
@@ -134,19 +108,10 @@ def install(view):
                (1, '<Key-t>',lambda event:  add_view_from_ph(event.widget)), 
                (1, '<Key-b>', lambda event: cd_prev_dir(event.widget)), 
                (1, '<Key-h>',lambda event:  go_prev_dir(event.widget)), 
-               (1, '<F2>',lambda event:  new_dir(event.widget)),
                (1, '<Key-l>', lambda event: go_next_dir(event.widget)), 
-               (1, '<F3>', lambda event: rename(event.widget)), 
                (1, '<Control-u>', lambda event: clip_curselection(event.widget)), 
-               (1, '<F1>', lambda event: create_text_file(event.widget)),
                (1, '<Key-z>', lambda event: remove_node(event.widget)), 
                (1, '<Key-s>', lambda event: toggle_pick(event.widget)))
            
-
-
-
-
-
-
 
 

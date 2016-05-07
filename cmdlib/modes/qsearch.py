@@ -1,63 +1,27 @@
-from cmdlib.ask import *
+from cmdlib.ask import Get
 from re import escape
-from cmdlib.app import root
 
 class QuickSearch(object):
     def __init__(self, view):
         """
 
         """
-        view.add_mode('Quick Search')
-        view.install(('Quick Search', '<Key>', lambda event: self.add_data(event.widget, event.keysym_num)),
-                        (1, '<Key-backslash>', lambda event: event.widget.chmode('Quick Search')),
-                        ('Quick Search', '<Escape>', lambda event: self.clear_data(event.widget)),
-                        ('Quick Search', '<Tab>', lambda event: self.next_match(event.widget)),
-                        ('Quick Search', '<BackSpace>', lambda event: self.del_data(event.widget)))
+        self.view = view
+        self.seq  = None
+        view.install((1, '<Key-g>', lambda event: self.start()))
 
+    def start(self):
+        jump =lambda data: self.seq.next()
+        edit = Get(self.view, on_data=self.on_data, on_done=lambda data: None, on_next=jump, on_prev=jump)
 
-        self.data = []
-
-    def clear_data(self, view):
-        root.statusbar.set_msg('')
-        del self.data[:]
-
-    def add_data(self, view, char):
-        """
-
-        """
-        try:
-            char = chr(char)
-        except ValueError:
-            return
-        else:
-            char = escape(char)
-            self.data.append(char)
-
-        data = ''.join(self.data)
-        root.statusbar.set_msg(data)
-        self.seq = view.find_item(data)
-        self.seq.next()
-
-    def del_data(self, view):
-        """
-
-        """
-
-        try:
-            self.data.pop()
-        except IndexError:
-            return
-
-        data = ''.join(self.data)
-        root.statusbar.set_msg(data)
-        self.seq = view.find_item(data)
-        self.seq.next()
-
-
-    def next_match(self, view):
+    def on_data(self, data):
+        self.seq = self.view.find(escape(data))
         self.seq.next()
 
 install = QuickSearch
+
+
+
 
 
 
