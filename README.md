@@ -250,11 +250,9 @@ def setup(view):
 autocall(setup) 
 ~~~
 
-You should modify the mapping passed to openwith mode according to your needs.
-
 **Opening files**
 
-Vy uses xdg-open application to open files. Check the manpages for xdg-open program.
+Keycmd uses xdg-open application to open files. Check the manpages for xdg-open program.
 Suppose you have defined to open '.c' files with gedit, if you put the cursor
 over a file named 'cool.c' then type 'Key-o' it will launch gedit with the cool.c file
 opened in it.
@@ -286,5 +284,6 @@ Support
 **Address:** irc.freenode.org
 
 **Channel:** #vy
+
 
 
