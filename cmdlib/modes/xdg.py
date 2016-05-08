@@ -6,7 +6,7 @@ def run_app(view):
     Popen(['xdg-open', ph])
 
 def install(view):
-    print 'foo'
     view.install((1, '<Key-o>', lambda event: run_app(event.widget))) 
+
 
 

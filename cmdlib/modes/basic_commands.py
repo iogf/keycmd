@@ -1,37 +1,46 @@
+from subprocess import check_output as run, CalledProcessError, STDOUT
 from cmdlib.ask import Ask
-import os
 from cmdlib import nix
+from cmdlib.app import root
+import os
 
 def cp(view):
     """
     """
-    xs = view.get_pick_list()
-    dst = view.get_curselection_path()
-    nix.cp(tuple(xs), dst)
-
+    xs   = view.get_pick_list()
+    dst  = view.get_curselection_path()
+    args = ['cp', '-R'] 
+    args.extend(xs) 
+    args.append(dst)
+    run(args)
     view.update_all_views()
     view.activate()
 
 def rm(view):
-    xs = view.get_pick_list()
-    nix.rm(tuple(xs))
+    xs   = view.get_pick_list()
+    args = ['rm', '-fr']
+    args.extend(xs)
+    run(args)
+
     view.update_all_views()
     view.activate()
 
 def mv(view):
-    xs = view.get_pick_list()
-    dst = view.get_curselection_path()
-    nix.mv(tuple(xs), dst)
+    xs   = view.get_pick_list()
+    dst  = view.get_curselection_path()
+    args = ['mv']
+    args.extend(xs)
+    args.append(dst)
+    run(args)
 
     view.update_all_views()
     view.activate()
 
 def rename(view):
-    ph = view.get_curselection_path()
+    ph  = view.get_curselection_path()
     dir = os.path.dirname(ph)
-
     ask = Ask(view)
-    nix.mv((ph,), os.path.join(dir, ask.data))
+    run(('mv', ph, os.path.join(dir, ask.data)))
 
     view.update_all_views()
     view.activate()
@@ -41,22 +50,26 @@ def mkdir(view):
     if not ask.data: return
     iidn = view.get_curselection()
     iidm = view.get_item_dir(iidn)
+    ph   = view.get_item_path(iidm)
 
-    ph = view.get_item_path(iidm)
-    nix.mkdir(os.path.join(ph, ask.data))
-
+    run(('mkdir', os.path.join(ph, ask.data)))
+    
     view.update_all_views()
     view.activate()
 
 def create_text_file(view):
     ask = Ask(view)
     if not ask.data: return
-    iidn = view.get_curselection()
-    iidm = view.get_item_dir(iidn)
-    ph = view.get_item_path(iidm)
+    iidn   = view.get_curselection()
+    iidm   = view.get_item_dir(iidn)
+    ph     = view.get_item_path(iidm)
 
-    fd = open(os.path.join(ph, ask.data), 'a+')
-    fd.close()
+    try:
+        fd = open(os.path.join(ph, ask.data), 'a+')
+    except Exception as e:
+        root.statusbar.set_msg(e)
+    else:
+        fd.close()
 
     view.update_all_views()
     view.activate()
@@ -69,7 +82,5 @@ def install(view):
                (1, '<F1>', lambda event: create_text_file(event.widget)),
                (1, '<F2>',lambda event:  mkdir(event.widget)),
                (1, '<F3>', lambda event: rename(event.widget)))
-
-
 
 
