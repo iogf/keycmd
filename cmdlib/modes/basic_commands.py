@@ -1,6 +1,5 @@
 from subprocess import check_output as run, CalledProcessError, STDOUT
 from cmdlib.ask import Ask
-from cmdlib import nix
 from cmdlib.app import root
 import os
 
@@ -82,5 +81,6 @@ def install(view):
                (1, '<F1>', lambda event: create_text_file(event.widget)),
                (1, '<F2>',lambda event:  mkdir(event.widget)),
                (1, '<F3>', lambda event: rename(event.widget)))
+
 
 
