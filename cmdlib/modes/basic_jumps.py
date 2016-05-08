@@ -15,7 +15,7 @@ def add_node(view):
     ph = view.get_item_path(iidn)
 
     iidm = view.add_view(ph)
-    view.set_curselection(iidm)
+    if iidm: view.set_curselection(iidm)
 
 
 def cd_prev_dir(view):
@@ -113,5 +113,6 @@ def install(view):
                (1, '<Key-z>', lambda event: remove_node(event.widget)), 
                (1, '<Key-s>', lambda event: toggle_pick(event.widget)))
            
+
 
 
