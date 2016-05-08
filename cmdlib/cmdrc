@@ -27,13 +27,17 @@ autoload(cmdlib.modes.basic_jumps)
 import cmdlib.modes.status
 autoload(cmdlib.modes.status)
 
+# Set <Key-i> to open data files with vy.
+import cmdlib.modes.extra
+autoload(cmdlib.modes.extra, 'vy')
+
 # Used to quickly jump to views/subviews.
 import cmdlib.modes.qsearch
 autoload(cmdlib.modes.qsearch)
 
 # Used to unpack files.
-# import cmdlib.modes.zip
-# autoload(cmdlib.modes.zip)
+import cmdlib.modes.zip
+autoload(cmdlib.modes.zip)
 
 # Used to open files with xdg-open.
 
@@ -64,6 +68,10 @@ def setup(view):
     view.master.master.geometry('300x500')
 
 autocall(setup) 
+
+
+
+
 
 
 

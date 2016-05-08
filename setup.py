@@ -1,6 +1,6 @@
 from distutils.core import setup
 setup(name="Keycmd",
-      version="2.0.1",
+      version="2.1.0",
       packages=["cmdlib", 'cmdlib.modes'],
       scripts=['keycmd'],
       package_data={'cmdlib': ['cmdrc', '/cmdrc/cmdrc']},
@@ -11,6 +11,8 @@ setup(name="Keycmd",
       keywords=['vim', 'vy', 'keycmd', 'filemanager'],
       classifiers=[],
       description="A modal/Vim-like file manager. Keycmd is a very flexible file manager")
+
+
 
 
 
