@@ -32,8 +32,8 @@ class App(Tk):
 
     
         self.view = View(DEFAULT_PATH, False, self.frame1, height=20)
-        ysb = ttk.Scrollbar(self.view, orient='vertical', command=self.view.yview)
-        xsb = ttk.Scrollbar(self.view, orient='horizontal', command=self.view.xview)
+        ysb = ttk.Scrollbar(self.frame1, orient='vertical', command=self.view.yview)
+        xsb = ttk.Scrollbar(self.frame1, orient='horizontal', command=self.view.xview)
         self.view.configure(yscrollcommand=ysb.set)
         self.view.configure(xscrollcommand=xsb.set)
 
@@ -115,5 +115,6 @@ class App(Tk):
 if __name__ == '__main__':
     app = App()
     app.mainloop()
+
 
 
