@@ -238,10 +238,9 @@ class View(Treeview):
     def set_curselection(self, iid):
         """
         """
-        self.selection_remove(self.selection())
     
         self.focus(iid)
-        self.selection_add((iid, ))
+        self.selection_set(iid)
         self.see(iid)
 
     def activate(self):
@@ -261,6 +260,7 @@ class View(Treeview):
 
             self.set_curselection(ind)
             yield
+
 
 
 
