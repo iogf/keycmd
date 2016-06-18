@@ -248,23 +248,19 @@ class View(Treeview):
         """
         self.set_curselection(self.get_children('')[0])
 
-    def find(self, regex):
+    def find(self, regex, item=''):
+        """
+        Perform a complete search on all items from item='', it uses a regex. 
+        When a given item matches it selects the item.
         """
 
-        """
-
-        for ind in self.get_children(self.get_item_dir(self.selection()[0])):
-            sre_match = re.search(regex, self.item(ind, 'text'))
-            if not sre_match:
-                continue
-
-            self.set_curselection(ind)
-            yield
-
-
-
-
-
+        for indi in self.get_children(item):
+            sre_match = re.search(regex, self.item(indi, 'text'))
+            if  sre_match:
+                self.set_curselection(indi)
+                yield
+            for indj in self.find(regex, indi):
+                yield
 
 
 
