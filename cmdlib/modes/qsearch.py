@@ -1,5 +1,5 @@
 from cmdlib.ask import Get
-from re import escape, split
+from re import escape, split, search
 
 class QuickSearch(object):
     def __init__(self, view):
@@ -8,6 +8,7 @@ class QuickSearch(object):
         """
         self.view = view
         self.seq  = None
+        self.data = None
         view.install((1, '<Key-g>', lambda event: self.start()))
 
     def start(self):
@@ -19,12 +20,14 @@ class QuickSearch(object):
                                        '<<Data>>':self.on_data, '<BackSpace>': self.on_data, 
                                        '<Return>': lambda wid: True, 
                                        '<Escape>': lambda wid: True})
+        self.data = self.view.flat()
 
     def on_data(self, wid):
         data     = wid.get()
         data     = split(' +', data)
         data     = '.+'.join(map(lambda ind: escape(ind), data))
-        self.seq = tuple(self.view.find(data))
+        cond     = lambda ind: search(data, self.view.item(ind, 'text'))
+        self.seq = filter(cond, self.data)
         self.index = -1
         self.search_down()
 
@@ -39,6 +42,7 @@ class QuickSearch(object):
         self.index = self.index + 1
 
 install = QuickSearch
+
 
 
 
