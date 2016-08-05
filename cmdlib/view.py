@@ -261,6 +261,29 @@ class View(Treeview):
             for indj in self.find(regex, indi):
                 yield indj
 
+    def find(self, regex, item=''):
+        """
+        Perform a complete search on all items from item='', it uses a regex. 
+        When a given item matches it selects the item.
+        """
+        cond     = lambda item: re.search(regex, self.item(indi, 'text'))
+        children = map(cond, self.get_children(item))
+        index    = 0
+        cmd      = yield
+
+        if not cmd or not children:
+            return
+
+        while True:
+            cmd = yield children[index]
+            index -= 1 if cmd else -1
+
+            if cmd:
+                continue
+
+        for indj in self.find(regex, indi):
+            yield indj
+
 
 
 
