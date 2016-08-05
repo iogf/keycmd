@@ -257,10 +257,11 @@ class View(Treeview):
         for indi in self.get_children(item):
             sre_match = re.search(regex, self.item(indi, 'text'))
             if  sre_match:
-                self.set_curselection(indi)
-                yield
+                yield indi
             for indj in self.find(regex, indi):
-                yield
+                yield indj
+
+
 
 
 
