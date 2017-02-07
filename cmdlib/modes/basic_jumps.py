@@ -37,7 +37,7 @@ def cd_dir(view):
     view.set_curselection(iidm)
 
 def cd_dir_path(view):
-    ask = Ask(view)
+    ask = Ask()
     if not ask.data: return
 
     iidn = view.get_curselection()
@@ -88,7 +88,7 @@ def toggle_pick(view):
     else: view.unpick()
 
 def add_view_from_ph(view):
-    ask = Ask(view)
+    ask = Ask()
     if not ask.data: return
 
     iidm = view.add_view(ask.data)
@@ -109,10 +109,12 @@ def install(view):
                (1, '<Key-b>', lambda event: cd_prev_dir(event.widget)), 
                (1, '<Key-h>',lambda event:  go_prev_dir(event.widget)), 
                (1, '<Key-l>', lambda event: go_next_dir(event.widget)), 
-               (1, '<Control-u>', lambda event: clip_curselection(event.widget)), 
+               (1, '<Key-u>', lambda event: clip_curselection(event.widget)), 
                (1, '<Key-z>', lambda event: remove_node(event.widget)), 
                (1, '<Key-s>', lambda event: toggle_pick(event.widget)))
            
+
+
 
 
 

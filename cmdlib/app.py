@@ -1,5 +1,3 @@
-########## 
-
 from Tkinter import *
 import ttk
 from ttk import Treeview
@@ -71,7 +69,7 @@ class App(Tk):
         self.view.heading('hour', text='Hour', anchor='w')
         self.view.column('hour', stretch=True)
 
-        self.read_data = Frame(self)
+        # self.read_data = Frame(self)
 
         self.statusbar = StatusBar(self)
 
@@ -113,10 +111,10 @@ class App(Tk):
         Grid.columnconfigure(self, 0, weight=1)
 
 
-
 if __name__ == '__main__':
     app = App()
     app.mainloop()
+
 
 
 

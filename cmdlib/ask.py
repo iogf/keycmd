@@ -28,29 +28,27 @@ class IdleEvent(object):
         lambda: self.widget.event_generate('<<Idle>>'))
 
 class InputBox(object):
-    def __init__(self, area, default_data=''):
+    def __init__(self, default_data=''):
         self.default_data = default_data
-        self.area    = area
-        self.frame   = Frame(root.read_data, border=1, padx=3, pady=3)
+        self.area    = root.focus_get()
+        self.frame   = Frame(root, border=1, padx=3, pady=3)
         self.entry   = Entry(self.frame)
-        self.entry.config(background='grey')
+        self.entry.config(background='#F5F595')
         self.entry.focus_set()
         self.entry.bind('<FocusOut>', lambda event: self.done())
         self.entry.insert('end', default_data)
         self.entry.pack(side='left', expand=True, fill=BOTH)
-        self.frame.pack(expand=True, fill=X)
 
-        root.read_data.grid(row=1, sticky='we')
+        self.frame.grid(row=1, sticky='we')
 
     def done(self):
         self.entry.destroy()
         self.frame.destroy()
-        root.read_data.grid_forget()
         self.area.focus_set()
 
 class Get(InputBox, DataEvent, IdleEvent):
-    def __init__(self, area, events={}, default_data=''):
-        InputBox.__init__(self, area, default_data)
+    def __init__(self, events={}, default_data=''):
+        InputBox.__init__(self, default_data)
         DataEvent.__init__(self, self.entry)
         IdleEvent.__init__(self, self.entry)
 
@@ -68,8 +66,8 @@ class Ask(InputBox):
     """
     """
 
-    def __init__(self, area, default_data =''):
-        InputBox.__init__(self, area, default_data)
+    def __init__(self, default_data =''):
+        InputBox.__init__(self, default_data)
         self.entry.bind('<Return>', lambda event: self.on_success())
         self.entry.bind('<Escape>', lambda event: self.done())
         self.data = ''
@@ -83,6 +81,7 @@ class Ask(InputBox):
         return self.data
 
     __repr__ = __str__
+
 
 
 

@@ -13,7 +13,7 @@ class QuickSearch(object):
 
     def start(self):
         jump =lambda data: self.seq.next()
-        ask = Get(self.view, events = {'<Alt-p>': lambda wid: self.search_down(), 
+        ask = Get(events = {'<Alt-p>': lambda wid: self.search_down(), 
                                        '<Alt-o>': lambda wid: self.search_up(), 
                                        '<Control-j>': lambda wid: self.search_down(), 
                                        '<Control-k>': lambda wid: self.search_up(), 
@@ -42,6 +42,7 @@ class QuickSearch(object):
         self.index = self.index + 1
 
 install = QuickSearch
+
 
 
 

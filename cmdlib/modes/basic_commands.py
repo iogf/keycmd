@@ -38,14 +38,14 @@ def mv(view):
 def rename(view):
     ph  = view.get_curselection_path()
     dir = os.path.dirname(ph)
-    ask = Ask(view)
+    ask = Ask()
     run(('mv', ph, os.path.join(dir, ask.data)))
 
     view.update_all_views()
     view.activate()
 
 def mkdir(view):
-    ask = Ask(view)
+    ask = Ask()
     if not ask.data: return
     iidn = view.get_curselection()
     iidm = view.get_item_dir(iidn)
@@ -57,7 +57,7 @@ def mkdir(view):
     view.activate()
 
 def create_text_file(view):
-    ask = Ask(view)
+    ask = Ask()
     if not ask.data: return
     iidn   = view.get_curselection()
     iidm   = view.get_item_dir(iidn)
@@ -81,6 +81,7 @@ def install(view):
                (1, '<Control-n>', lambda event: create_text_file(event.widget)),
                (1, '<Control-f>',lambda event:  mkdir(event.widget)),
                (1, '<Key-r>', lambda event: rename(event.widget)))
+
 
 
 
