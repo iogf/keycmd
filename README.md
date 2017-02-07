@@ -138,17 +138,17 @@ Try it out.
 
 **Creating a file**
 
-In order to create a file you put the cursor over a view then press 'F1'.
+In order to create a file you put the cursor over a view then press 'Control-n'.
 It will open an edit area where you will type the filename.
 
 **Creating a directory**
 
-Put the cursor over a view then type 'F2', it opens an edit area where to type
+Put the cursor over a view then type 'Control-f', it opens an edit area where to type
 the dir name.
 
 **Renaming files**
 
-Put the cursor over a view or a subview then press 'F3', it will open an edit area
+Put the cursor over a view or a subview then press 'Key-r', it will open an edit area
 where to insert the new name.
 
 **Quickly changing cursor to a view/subview**
@@ -284,6 +284,7 @@ Support
 **Address:** irc.freenode.org
 
 **Channel:** #vy
+
 
 
 
