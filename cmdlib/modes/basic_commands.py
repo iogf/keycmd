@@ -78,9 +78,10 @@ def install(view):
     view.install((1, '<Key-y>', lambda event: cp(event.widget)), 
                (1, '<Key-m>',lambda event:  mv(event.widget)), 
                (1, '<Key-d>',lambda event:  rm(event.widget)), 
-               (1, '<F1>', lambda event: create_text_file(event.widget)),
-               (1, '<F2>',lambda event:  mkdir(event.widget)),
-               (1, '<F3>', lambda event: rename(event.widget)))
+               (1, '<Control-n>', lambda event: create_text_file(event.widget)),
+               (1, '<Control-f>',lambda event:  mkdir(event.widget)),
+               (1, '<Key-r>', lambda event: rename(event.widget)))
+
 
 
 

@@ -70,5 +70,8 @@ xdg-open setup.py
 
 update-desktop-database ~/.local/share/applications
 xdg-mime default vy.desktop text/html 
+##############################################################################
+# check for Key-r.
+grep -r -l "<Key-r>" .
 
 

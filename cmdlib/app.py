@@ -76,9 +76,9 @@ class App(Tk):
         self.statusbar = StatusBar(self)
 
         self.view.pack(expand=True, fill=BOTH, side=TOP)
-        self.frame1.pack(expand=True, fill=BOTH, side=TOP)
+        self.frame1.grid(row=0, sticky='wens')
 
-        self.statusbar.pack(side=BOTTOM, fill=X)
+        self.statusbar.grid(row=2, sticky='we')
 
         self.view.activate()
         self.view.focus_set()
@@ -109,12 +109,15 @@ class App(Tk):
         for handle, args, kwargs in HANDLE:
             handle(self.view, *args, **kwargs)
 
+        Grid.rowconfigure(self, 0, weight=1)
+        Grid.columnconfigure(self, 0, weight=1)
 
 
 
 if __name__ == '__main__':
     app = App()
     app.mainloop()
+
 
 
 
