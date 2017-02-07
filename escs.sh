@@ -73,5 +73,12 @@ xdg-mime default vy.desktop text/html
 ##############################################################################
 # check for Key-r.
 grep -r -l "<Key-r>" .
+##############################################################################
+# merge development into master.
+cd /home/tau/projects/keycmd-code/
+git checkout master
+git merge development
+git push
+git checkout development
 
 
